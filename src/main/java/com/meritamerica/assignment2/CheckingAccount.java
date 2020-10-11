@@ -1,34 +1,30 @@
 package com.meritamerica.assignment2;
 
 public class CheckingAccount extends BankAccount {
-	private double InterestRate = 0.0001;
-	private double BalanceChecking = .0;
+	final double CHECKING_INTEREST_RATE = 0.0001;
+	private double checkingBalance = .0;
 
 	public CheckingAccount(double openingBalance) {
-		this.BalanceChecking = openingBalance;
+		this.checkingBalance = openingBalance;
 	}
 
 	public double getBalance() {
-		return BalanceChecking;
+		return checkingBalance;
 	}
 
-	public void setBalanceChecking(double balanceChecking) {
-		BalanceChecking = balanceChecking;
+	public void setCheckingBalance(double checkingBalance) {
+		this.checkingBalance = checkingBalance;
 	}
 
 	public double getInterestRate() {
-		return InterestRate;
-	}
-
-	public void setInterestRate(double interestRate) {
-		InterestRate = interestRate;
+		return CHECKING_INTEREST_RATE;
 	}
 
 	public boolean withdraw(double amount) {
-		if (amount > BalanceChecking) {
+		if (amount > checkingBalance) {
 			return false;
 		} else {
-			BalanceChecking -= amount;
+			checkingBalance -= amount;
 			return true;
 		}
 
@@ -38,20 +34,20 @@ public class CheckingAccount extends BankAccount {
 		if (amount < 0) {
 			return false;
 		} else {
-			BalanceChecking += amount;
+			checkingBalance += amount;
 			return true;
 		}
 
 	}
 
 	public double futureValue(int years) {
-		double value = Math.pow(1 + InterestRate, years);
-		double FV = BalanceChecking * value;
+		double value = Math.pow(1 + CHECKING_INTEREST_RATE, years);
+		double FV = checkingBalance * value;
 		return FV;
 	}
 
 	public String toString() {
-		return "Checking Account Balance " + BalanceChecking + "\n Checking Account Interest Rate" + InterestRate
+		return "Checking Account Balance " + checkingBalance + "\n Checking Account Interest Rate" + CHECKING_INTEREST_RATE
 				+ "\n Checking Account Balance in 3 years " + futureValue(3);
 	}
 }

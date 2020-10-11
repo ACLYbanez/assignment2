@@ -1,35 +1,30 @@
 package com.meritamerica.assignment2;
 
 public class SavingsAccount extends BankAccount {
+	private double savingsBalance = .0;
+	final double SAVINGS_INTEREST_RATE = 0.01;
+	
 	public SavingsAccount(double openingBalance) {
-		this.BalanceSavings = openingBalance;
+		this.savingsBalance = openingBalance;
 	}
-
-	private double BalanceSavings = .0;
 
 	public double getBalance() {
-		return BalanceSavings;
+		return savingsBalance;
 	}
 
-	public void setBalanceSavings(double balanceSavings) {
-		BalanceSavings = balanceSavings;
+	public void setsavingsBalance(double savingsBalance) {
+		this.savingsBalance = savingsBalance;
 	}
 
 	public double getInterestRate() {
-		return InterestRate;
+		return SAVINGS_INTEREST_RATE;
 	}
-
-	public void setInterestRate(double interestRate) {
-		InterestRate = interestRate;
-	}
-
-	private double InterestRate = 0.01;
 
 	public boolean withdraw(double amount) {
-		if (amount > BalanceSavings) {
+		if (amount > savingsBalance) {
 			return false;
 		} else {
-			BalanceSavings -= amount;
+			savingsBalance -= amount;
 			return true;
 		}
 
@@ -39,20 +34,20 @@ public class SavingsAccount extends BankAccount {
 		if (amount < 0) {
 			return false;
 		} else {
-			BalanceSavings += amount;
+			savingsBalance += amount;
 			return true;
 		}
 
 	}
 
 	public double futureValue(int years) {
-		double value = Math.pow(1 + InterestRate, years);
-		double FV = BalanceSavings * value;
+		double value = Math.pow(1 + SAVINGS_INTEREST_RATE, years);
+		double FV = savingsBalance * value;
 		return FV;
 	}
 
 	public String toString() {
-		return "Savings Account Balance " + BalanceSavings + "\n Savings Account Interest Rate" + InterestRate
+		return "Savings Account Balance " + savingsBalance + "\n Savings Account Interest Rate" + SAVINGS_INTEREST_RATE
 				+ "\n Savings Account Balance in 3 years " + futureValue(3);
 	}
 }
