@@ -9,7 +9,7 @@ public class CDAccount extends BankAccount {
 	
 	
 	public CDAccount(CDOffering offering, double balance) {
-		super.();
+		super();
 		this.offering = offering;
 		this.balance = balance; 
 	}

@@ -4,44 +4,70 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class MeritBank {
+	public static int size = 5; 
+	public static int numberOfAccountHolders;
+	public static long[] accountNumbers = new long[size];
+	public static AccountHolder[] accountHolders = new AccountHolder[size];
+	public static CDOffering[] CDOfferings = new CDOffering[size];
+	
 	
 	static void addAccountHolder(AccountHolder accountHolder) {
 		
 	}
 	 static AccountHolder[] getAccountHolders() {
-		 // return all the AccountHolders
+		 return accountHolders;
 	 }
 	
 	static CDOffering[] getCDOfferings() {
-		// return all the CDOfferings
+		return CDOfferings;
 	}
 	
 	static CDOffering getBestCDOffering(double depositAmount) {
-		// get the best CD Offering and deposit the amount
+		CDAccount temp = new CDAccount(CDOfferings[0], depositAmount);
+		CDOffering bestOffering = CDOfferings[0];
+		for(int i = 0; i < size; i++) {
+			if(temp.futureValue(CDOfferings[i].getTerm()) > temp.futureValue(CDOfferings[i - 1].getTerm())) {
+				bestOffering = CDOfferings[i];
+			}
+		}
+		return bestOffering;
 	}
 	
 	static CDOffering getSecondBestCDOffering(double depositAmount) {
-		// get the second best CD Offering and deposit the amount
+		CDAccount temp = new CDAccount(CDOfferings[0], depositAmount);
+		CDOffering secondBestOffering = CDOfferings[0];
+		CDOffering bestOffering = CDOfferings[0];
+		for (int i = 1; i < size; i++) {
+			if(temp.futureValue(CDOfferings[i].getTerm()) > temp.futureValue(CDOfferings[i - 1].getTerm())) {
+				secondBestOffering = bestOffering;
+				bestOffering = CDOfferings[i];
+			}
+		}
+		return secondBestOffering;
 	}
 	
-	static void clearCDOfferings() {
-		// no idea what this is 
+	public static void clearCDOfferings() {
+		CDOfferings = null;
 	}
 	
 	static void setCDOfferings(CDOffering[] offerings) {
-		// change the CD offerings (in the array)
+		CDOfferings = offerings;
 	}
 	
 	static long getNextAccountNumber() {
-		// return the next account number (use a loop??)
+		return  accountNumbers[numberOfAccountHolders];
 	}
 	
 	static double totalBalances() {
-		// no idea what this is
-		// return something of the double type
+		double totalBalance = 0.0;
+		for(int i = 0; i < numberOfAccountHolders; i++) {
+			totalBalance += (accountHolders[i].getTotalBalance());
+		}
+		return totalBalance;
 	}
 	
 	static double futureValue(double presentValue, double interestRate, int term) {
-		
+		double futureValue = (presentValue * Math.pow(1.0 + interestRate, term));
+		return futureValue;
 	}
 }

@@ -3,9 +3,14 @@ package com.meritamerica.assignment2;
 public class CheckingAccount extends BankAccount {
 	final double CHECKING_INTEREST_RATE = 0.0001;
 	private double checkingBalance = .0;
+	public double openingBalance;
+	
+	public double futureBalance;
 
 	public CheckingAccount(double openingBalance) {
-		this.checkingBalance = openingBalance;
+		super();
+		this.openingBalance = openingBalance;
+		CHECKING_INTEREST_RATE = interestRate;
 	}
 
 	public double getBalance() {
